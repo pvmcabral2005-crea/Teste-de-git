@@ -25,6 +25,7 @@
        #if nums[i] %2 == 0:
           #nums[i] = 0
 #print('números pares substiuidos por zero são: ', nums)
+
 #numeros = []
 #pares = []
 #ímpares = []
@@ -36,10 +37,10 @@
 #else:
      #ímpares.append(numero)
      #print("lista completa:", numeros)
-     #print("numeros pares", pares)
-     #print("numeros ímpares", ímpares)
+     #print("numeros pares:", pares)
+     #print("numeros ímpares:", ímpares)
 
-lista_convidados = []
+lista_convidados = ["Pedro", "Jasper", "Carter", "Bia", "Marta"]
 
 while True:
     print("""=======Menu=======
@@ -49,34 +50,51 @@ while True:
           4-Remover convidado
           5-Quantidade de convidados
           6-Editar convidado
-          0-Sair""")
+          0-Sair """)
     opção = int(input("Digite a opção escolhida:"))
     if opção == 1:
-        nome = input("Nome do convidado: ")
-        lista_convidados.append(nome)
-        print(lista_convidados)
-        
+        convidado = input("Nome do convidado:")
+        lista_convidados.append(input("Digite o convidado a ser adicionado:"))
     elif opção == 2:
-        print("lista de convidados:")
-        if not lista_convidados:
-            print("Convidado não está na lista")
-            if nome in lista_convidados:
-                print(lista_convidados)
-    elif opção == 3:
-        print("Digite o convidado a ser consultado:")
-        if nome in lista_convidados:
-            print(f"{nome} está na lista de convidados")
-        else:
-            print(f"{nome} não está na lista de convidados")
-    elif opção == 4:
-        print("O nome do covidado a ser removido:")
-        if nome in lista_convidados:
-            lista_convidados.remove(nome)
-            print(f"{nome} está removido da lista")
-        else:
-            print(f"{nome} não está removido da lista")
-    elif opção == 5:
-      print(len(lista_convidados))
-    
+        lista_convidados = input("Os convidados da lista são:")
+        for i in lista_convidados:
+            print(lista_convidados)
+            print()
+            print(i)
+            count = 1
+            for i in lista_convidados:
+                print(f"{count} - {1}")
+                count+= 1
 
-        
+    elif opção == 3:
+       convidado = input("Digite o convidado a ser consultado:")
+       if convidado in lista_convidados:
+           for i in lista_convidados:
+               print(f"{convidado} está na lista de convidados")
+       else:
+        print(f"{convidado} não está na lista de convidados")
+    elif opção == 4:
+        convidado = input("Digite o convidado a ser removido:")
+        if convidado in lista_convidados:
+            for i in lista_convidados:
+                lista_convidados.remove(convidado)
+                print(f"{convidado} está removido da lista")
+        else:
+            print(f"{convidado} não está removido da lista")
+    elif opção == 5:
+        print(len(lista_convidados))
+    elif opção == 6:
+        convidado_antigo = input("Digite o convidado a ser editado:")
+        if convidado_antigo in lista_convidados:
+            convidado_novo = input("Digite o novo convidado editado:")
+            index = lista_convidados.index(convidado_antigo)
+            lista_convidados[index] = convidado_novo
+            print(f"{convidado_antigo} foi atualizado com {convidado_novo}")
+        else:
+            print(f"{convidado_antigo} não está na lista de convidados") 
+    elif opção == 0:
+        print("Saindo do programa")
+        break
+    else:
+    print("Opção inválida, Tente novamente")
+  

@@ -53,16 +53,33 @@
         #print("Erro: Divisão por zero não é permitida")
 #menu()
 
-def soma(a,b,c):
-   return a+b+c
-resultado = soma(30,50,20)
-print(resultado)
+#def soma(a,b,c):
+   #return a+b+c
+#a = int(input("Digite primeiro número:"))
+#b = int(input("Digite segundo número:"))
+#c = int(input("Digite terceiro número:"))
 
-def calcular_media(n1,n2):
-   n1 = float(input("Digite a primeira nota:"))
-   n2 = float(input("Digite a segunda nota:"))
-   media = (n1 + n2)/2
-   return media
-resultado = calcular_media(8.0,6.2)
-print(resultado)
+#print(soma(a,b,c))
+
+#def calcular_media(n1,n2,n3,n4,n5):
+   #return (n1 + n2 + n3 + n4 + n5)/5
+#n1 = float(input("Digite primeiro número:"))
+#n2 = float(input("Digite segundo número:"))
+#n3 = float(input("Digite a terceiro número:"))
+#n4 = float(input("Digite terceiro número:"))
+#n5 = float(input("Digite quinto número:"))
+#media = (n1+n2+n3+n4+n5)/5
+#print(f"A média dos números é: {calcular_media(n1,n2,n3,n4,n5)}")
+
+#def contar_vogais():
+    #texto = "filme incrível"
+    #count = 0
+    #for letra in texto :
+        #if letra == "a" or letra == "e" or letra == "i" or letra == "o" or letra == "u":
+            #count+= 1
+    #return count
+    
+#print(f"O total de vogais é: {contar_vogais()}")
+
+
 

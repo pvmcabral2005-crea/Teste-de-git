@@ -81,5 +81,3 @@
     
 #print(f"O total de vogais é: {contar_vogais()}")
 
-
-

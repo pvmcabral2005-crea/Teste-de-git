@@ -51,41 +51,77 @@
 #quantidade = len(lista_amigos)
 #print(f"Há {quantidade} amigos na lista")
 
-dicionario_idiomas = {
-    "House": "Casa",
-    "Dog" : "Cão",
-    "Tree": "Árvore",
-    "Speed": "Velocidade",
-     "motorcycle": "moto",
-     "sky": "céu"
-}
-def traduzir_palavras(palavra):
-    if palavra in dicionario_idiomas:
-        return dicionario_idiomas[palavra]
-    else:
-        return "Palavra não encontrada"
+#dicionario_idiomas = {
+    #"House": "Casa",
+    #"Dog" : "Cão",
+    #"Tree": "Árvore",
+    #"Speed": "Velocidade",
+     #"motorcycle": "moto",
+     #"sky": "céu"
+#}
+#def traduzir_palavras(palavra):
+    #if palavra in dicionario_idiomas:
+        #return dicionario_idiomas[palavra]
+    #else:
+        #return "Palavra não encontrada"
     
-def adicionar_palavra(tradução,palavra):
-     dicionario_idiomas[palavra] = tradução
-     print(f"Palavra {palavra} adicionada com sucesso")
+#def adicionar_palavra(tradução,palavra):
+     #dicionario_idiomas[palavra] = tradução
+     #print(f"Palavra {palavra} adicionada com sucesso")
+#while True:
+    #print("Dicionário Inglês-Português")
+    #print("1-Buscar Tradução")
+    #print("2-Adicionar Palavra")
+    #print("3-Sair")
+    #opção = input("Digite a opção que desejar:")
+    #if opção == "1":
+        #palavra_buscada = input("Digite a palavra em inglês: ")
+        #tradução = traduzir_palavras(palavra_buscada)
+        #print(f"Tradução: {tradução}")
+    #elif opção == "2":
+        # palavra_nova = input("Digite a palavra em inglês:")
+         #nova_tradução = input(" Digite a tradução para português:")
+         #adicionar_palavra(palavra_nova, nova_tradução)
+    #elif opção == "3":
+        #print("Saindo do programa")
+        #break
+    #else:
+        #print("Opção inválida.Tente novamente")
+
+loja_produtos = {
+    "camisa": 35,
+    "bermuda": 39,
+    "boné": 42,
+    "calça": 37
+}
+
+def verificar_produto(produto):
+    if produto in loja_produtos:
+        return f"O produto {produto} está em estoque na quantidade: {loja_produtos[produto]}"
+    else:
+        return f"O produto não está disponível no estoque"
+def adicionar_produto(produto,quantidade):
+    if produto in loja_produtos:
+        loja_produtos[produto]+=quantidade
+    else:
+        loja_produtos[produto] =quantidade
+    print(f"O produto {produto} foi adicionado com sucesso: {loja_produtos[produto]}")
 while True:
-    print("Dicionário Inglês-Português")
-    print("1-Buscar Tradução")
-    print("2-Adicionar Palavra")
-    print("3-Sair")
-    opção = input("Digite a opção que desejar:")
+    print("Estoque de produtos")
+    print("1-Verificar estoque")
+    print("2-Adicionar produto")
+    print("3-Sair do programa")
+    opção = input("Digite a opção desejada:")
     if opção == "1":
-        palavra_buscada = input("Digite a palavra em inglês: ")
-        tradução = traduzir_palavras(palavra_buscada)
-        print(f"Tradução: {tradução}")
+        buscar_produto = input("Digite o nome do produto:")
+        resposta = verificar_produto(buscar_produto)
+        print(resposta)
     elif opção == "2":
-         palavra_nova = input("Digite a palavra em inglês:")
-         nova_tradução = input(" Digite a tradução para português:")
-         adicionar_palavra(palavra_nova, nova_tradução)
+        produto_novo = input("Digite novo produto:")
+        quantidade_nova = int(input("Digite a nova quantidade:"))
+        adicionar_produto(produto_novo,quantidade_nova)
     elif opção == "3":
         print("Saindo do programa")
         break
     else:
         print("Opção inválida.Tente novamente")
-
-   

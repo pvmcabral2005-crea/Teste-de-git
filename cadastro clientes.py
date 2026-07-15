@@ -13,13 +13,13 @@ def cadastrar_cliente():
     novo_cliente["compras"] = []
     novo_cliente["categoria"] = "Regular"
     clientes[cpf_cliente] = novo_cliente
-    print(f"O cliente{novo_cliente["nome"]} está cadastrado com sucesso!")
+    print(f"O cliente {novo_cliente["nome"]} está cadastrado com sucesso!")
 
 
-def listar_clientes(cliente):
+def listar_clientes():
     if not clientes:
         print("Não há cliente cadastrado")
-        return
+        return clientes
     print("Lista de clientes:")
     for cpf_cliente, dados in clientes.items():
         print(f"""CPF: {cpf_cliente}
@@ -29,25 +29,65 @@ def listar_clientes(cliente):
               Categoria: {dados["categoria"]}""")
 
 
-def bucar_cliente(cpf_cliente):
-    if cpf_cliente in clientes:
-        cliente_buscar = input("Digite o nome do cliente que deseja buscar:")
-        print("Cliente está cadastrado no sistema")
+def buscar_cliente(cpf_buscar):
+    if cpf_buscar in clientes:
+        dados = clientes[cpf_buscar]
+        print(f"O cliente foi encontrado: {dados["nome"]}")
+        return dados
     else:
-        print("Cliente não está cadastrado no cliente")
+        print("Cliente não foi encontrado")
 
+def atualizar_cliente():
+    cpf_atualizar = input("Digite o CPF que deseja atualizar:")
+    cliente = buscar_cliente(cpf_atualizar)
+    if cliente:
+        cliente["nome"] = input("Digite o nome do cliente:")
+        cliente["idade"] = input("Digite a idade do cliente:")
+        print(f"O cliente{cliente ["nome"]} está atualizado com sucesso")
+def excluir_cliente():
+    deletar_cpf = input("Digite o CPF do cliente que deseja excluir:")
+    cliente = buscar_cliente(deletar_cpf)
+    if cliente:
+        del clientes[deletar_cpf]
+        print("Cliente excluído")
+       
 
+def calcular_faturamento_do_cliente():
+    cpf_cliente = input("Digite o CPF do cliente que quer fazer a compra:")
+    cliente = buscar_cliente(cpf_cliente)
+    if cliente:
+        faturamento = sum(cliente["compras"])
+        print(f"O faturamento total do cliente {cliente["compras"]} é R${faturamento:.2f}")
+def fazer_compras():
+    cpf_cliente = input("Digite o CPF do cliente que fará a compra:")
+    cliente_compra = buscar_cliente(cpf_cliente)
+    if cliente_compra:
+        compra_valor = float(input("Digite o valor da compra do cliente:"))
+        cliente_compra["compras"].append(compra_valor)
+
+    
 while True:
-    print("Cadastro de clientes Fikelinduh")
-    print("1-Cadastrar clientes")
-    print("2-Listar clientes")
-    print("3-Buscar clientes")
-    print("4-Atualizar clientes")
-    print("5-Remover clientes")
-    print("6-Compras")
-    print("0-Sair")
+    print("""====Cadastro de clientes FikeLinduh====
+          1-Cadastrar clientes
+          2-Listar clientes
+          3-Buscar cliente
+          4-Atualizar cliente
+          5-Excluir cliente
+          6-Fazer compras
+          0-Sair """)
+    
     opção = input("Digite o número da opção:")
     if opção == "1":
         cadastrar_cliente()
     elif opção == "2":
         listar_clientes()
+    elif opção == "3":
+        cpf_cliente = input("Digite o CPF do cliente que deseja buscar:")
+    elif opção == "4":
+        atualizar_cliente()
+    elif opção == "5":
+        excluir_cliente()
+    elif opção == "6":
+        fazer_compras()
+    else:
+        print("Opção não existe.Tente novamente")

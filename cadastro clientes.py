@@ -75,7 +75,7 @@ while True:
           5-Excluir cliente
           6-Fazer compras
           0-Sair """)
-    
+        
     opção = input("Digite o número da opção:")
     if opção == "1":
         cadastrar_cliente()

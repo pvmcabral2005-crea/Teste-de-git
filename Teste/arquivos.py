@@ -67,3 +67,4 @@ def substituir_vogais():
         print("Arquivo não encontrado.Digite novamente")
 substituir_vogais()
                            
+                           

@@ -3,21 +3,23 @@ conexao = sqlite3.connect('exemplo.db')
 cursor = conexao.cursor()
 
 cursor.execute('''
-     CREATE TABLE Alunos (
+      CREATE TABLE If Not Exists Alunos (
      ID Integer Primary Key,
-     Nome Text Not Null,
-     Idade Int Integer,
-     Curso Text)
-     ''')
+      Nome Text Not Null,
+      Idade Int Integer,
+      Curso Text)
+      ''')
+conexao.commit()
+def inserir_dados(nome,idade,curso):
 
-# conexao.commit()
-
-cursor.execute('''
+        cursor.execute('''
 Insert Into Alunos (Nome, Idade, Curso)
-Values ("Pedro", 21, "Programador de sistemas"),
-        ("Carla", 22, "Medicina"),
-        ("Marcos", 30, "Direito")''')
+Values (?,?,?)''', (nome, idade, curso))
 
 conexao.commit()
 
-print("Banco de dados criado")
+nome = input("Digite o nome do aluno:")
+idade = int(input("Digite a idade do aluno:"))
+curso = input("Digite nome do curso:")
+inserir_dados(nome,idade,curso)
+

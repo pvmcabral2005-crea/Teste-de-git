@@ -1,29 +1,31 @@
 import sqlite3
-conexao = sqlite3.connect('projeto.db')
+conexao = sqlite3.connect('ficha.db')
 cursor = conexao.cursor()
 
 cursor.execute(
-'''Create Table If Not Exists Ficha_de_alimentos (
+'''Create Table If Not Exists Ficha_técnica_ingredientes (
     ID Integer Primary Key,
-    Produto Text Not Null,
-    Quantidade Int Integer,
-    Valor_produto Real,
+    Ingrediente Text Not Null,
+    Quantidade_comprada Int Integer,
+    Valor_ingrediente Real,
     Quant_usada Int Integer,
+    Unidade Text Not Null,
     Valor_final Real)
 ''')
 conexao.commit()
 
 
-def inserir_dados(Produto, Quantidade, Valor_produto, Quant_usada, Valor_final):
+def inserir_dados(Ingrediente, Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final):
     cursor.execute(
-        '''Insert Into Ficha de alimentos(Produto,Quantidade, Valor_produto, Quant_usada, Valor_final)
-        Values(?,?,?,?,?)''', (Produto, Quantidade, Valor_produto, Quant_usada, Valor_final))
-
+        '''Insert Into Ficha_técnica_ingredientes(Ingrediente,Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final)
+        Values(?,?,?,?,?,?)''', (Ingrediente, Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final))
     conexao.commit()
 
-Produto = input("Digite o produto:")
-Quantidade = int(input("Qual quantidade do produto:"))
-Valor_produto = float(input("Qual o valor do produto:"))
-Quant_usada = int(input("Quatidade usada:"))
-Valor_final = float(input("Qual o valor final do produto:"))
-inserir_dados(Produto, Quantidade, Valor_produto, Quant_usada, Valor_final)
+Ingrediente = input("Digite o ingrediente utilizado:")
+Quantidade_comprada = int(input("Qual a quantidade do produto:"))
+Valor_ingrediente = float(input("Qual o valor do produto: R$ "))
+Quant_usada = int(input("Quantidade usada:"))
+Unidade = input("Qual unidade de medida:")
+Valor_final = float(input("Qual o valor final do produto:R$ "))
+inserir_dados(Ingrediente, Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final)
+

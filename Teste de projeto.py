@@ -4,7 +4,7 @@ cursor = conexao.cursor()
 
 cursor.execute(
 '''Create Table If Not Exists Ficha_técnica_ingredientes (
-    ID Integer Primary Key,
+    ID Integer Primary Key Autoincrement,
     Ingrediente Text Not Null,
     Quantidade_comprada Int Integer,
     Valor_ingrediente Real,

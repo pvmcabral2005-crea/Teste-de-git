@@ -4,7 +4,7 @@ cursor = conexao.cursor()
 
 cursor.execute('''
       CREATE TABLE If Not Exists Alunos (
-     ID Integer Primary Key,
+      ID Integer Primary Key,
       Nome Text Not Null,
       Idade Int Integer,
       Curso Text)

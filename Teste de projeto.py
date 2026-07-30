@@ -3,7 +3,7 @@ conexao = sqlite3.connect('ficha.db')
 cursor = conexao.cursor()
 
 cursor.execute(
-'''Create Table If Not Exists Ficha_técnica_ingredientes (
+'''Create Table If Not Exists Ingredientes (
     ID Integer Primary Key Autoincrement,
     Ingrediente Text Not Null,
     Quantidade_comprada Int Integer,
@@ -17,7 +17,7 @@ conexao.commit()
 
 def inserir_dados(Ingrediente, Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final):
     cursor.execute(
-        '''Insert Into Ficha_técnica_ingredientes(Ingrediente,Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final)
+        '''Insert Into Ingredientes(Ingrediente,Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final)
         Values(?,?,?,?,?,?)''', (Ingrediente, Quantidade_comprada, Valor_ingrediente, Quant_usada, Unidade, Valor_final))
     conexao.commit()
 

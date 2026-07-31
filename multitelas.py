@@ -1,0 +1,13 @@
+import tkinter as tk
+janela = tk.Tk()
+janela.title("Interface com frames")
+janela.geometry("800x500")
+janela.configure(bg= "Orange")
+janela.state("zoomed")
+frame = tk.Frame(janela,borderwidth=3, relief="sunken")
+frame.pack(padx=10, pady=10)
+label = tk.Label(janela,text="Meu estilo de frame")
+label.pack(pady=5, padx=5)
+button = tk.Button(frame, text='Clique Aqui')
+button.pack(padx=5,pady=5)
+janela.mainloop()

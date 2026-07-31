@@ -1,25 +1,27 @@
 import tkinter as tk
 import sqlite3
 janela = tk.Tk()
-janela.title("Olá, Pedro Victor")
+janela.title("Ficha técnica de alimentos")
 janela.geometry("800x660")
 janela.resizable(True,False)
+janela.configure(bg = "White")
 label_nome = tk.Label(janela, text= "Digite seu nome:")
-label_nome.pack()
-entry_nome = tk.Entry(janela)
-entry_nome.pack()
+label_nome.pack(pady=2)
+entry_nome = tk.Entry(janela, width=40)
+entry_nome.pack(pady=5)
 label_idade = tk.Label(janela, text= "Digite sua idade:")
-label_idade.pack()
-entry_idade = tk.Entry(janela)
-entry_idade.pack()
-label_curso = tk.Label(janela, text= "Digite seu cruso:")
-label_curso.pack()
-entry_curso = tk.Entry(janela)
-entry_curso.pack()
+label_idade.pack(pady=2)
+entry_idade = tk.Entry(janela, width=40)
+entry_idade.pack(pady=5)
+label_curso = tk.Label(janela, text= "Digite seu curso:")
+label_curso.pack(pady=2)
+entry_curso = tk.Entry(janela, width=40)
+entry_curso.pack(pady=5)
 def exibir_nome():
     nome = entry_nome.get()
     idade = int(entry_idade.get())
     curso = entry_curso.get()
+    
 
     conexao = sqlite3.connect("ficha.db")
     cursor = conexao.cursor()
@@ -33,8 +35,8 @@ def exibir_nome():
     cursor.execute('''Insert Into alunos (nome,idade,curso) Values(?,?,?)''',(nome,idade,curso))
     conexao.commit()
 
-    button = tk.Button(janela,text= "Enviar", command=exibir_nome)
-    button.pack()
+button = tk.Button(janela,text= "Enviar", command=exibir_nome)
+button.pack(pady=5)
     
 janela.mainloop()
 

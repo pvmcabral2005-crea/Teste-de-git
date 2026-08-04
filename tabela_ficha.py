@@ -14,7 +14,7 @@ cursor.execute('''Create Table If Not Exists Ingredientes (
                 ''')
 
 
-def cadastrar_ingrediente():
+def cadastrar_ingredientes():
     nome_ingrediente = input("Qual ingrediente?:")
     quantidade = int(input("Quantidade comprada:"))
     valor_ingrediente = int(input("Qual valor do ingrediente?:"))
@@ -47,3 +47,21 @@ def excluir_ingredientes():
     id = int(input("ID:"))
     cursor.execute("Delete From Ingredientes Where id = ? ", (id,))
     conexao.commit()
+while True:
+    print("""===FICHA TÉCNICA DE ALIMENTOS===
+            1- Cadastrar ingrediente
+            2-Listar ingrediente
+            3-Atualizar ingrediente
+            4-Excluir ingrediente""")
+
+    opção = int(input("Digite a opção escolhida:"))
+    if opção == "1":
+        cadastrar_ingredientes()
+    elif opção == "2":
+        listar_ingredientes()
+    elif opção == "3":
+        atualizar_ingredientes()
+    elif opção == "4":
+        excluir_ingredientes()
+    else:
+        print("Opção inválida.Tente novamente")

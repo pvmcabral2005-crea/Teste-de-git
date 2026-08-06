@@ -32,7 +32,7 @@ def exibir_nome():
     Curso Text Not Null)''')
     conexao.commit()
 
-    cursor.execute('''Insert Into alunos (nome,idade,curso) Values(?,?,?)''',(nome,idade,curso))
+    cursor.execute('''Insert Into alunos (nome,idade,curso) Values(?,?,?)''',(nome,idade,curso,))
     conexao.commit()
 
 button = tk.Button(janela,text= "Enviar", command=exibir_nome)

@@ -1,27 +1,27 @@
 import sqlite3
 
-conexao = sqlite3.connect('ficha.db')
+conexao = sqlite3.connect('Ingrediente.db')
 cursor = conexao.cursor()
 
-cursor.execute('''Create Table If Not Exists Ingredientes (
-                ID Integer Primary Key Autoincrement,
-                Ingredientes Text Not Null,
-                Quantidade_comprada Int Integer,
-                    Valor_ingrediente Real,
-                    Quant_usada Int Integer,
-                    Unidade Text Not Null,
-                    Valor_final Real)
-                ''')
+cursor.execute('''Create Table If Not Exists Ficha_ingredientes (
+ID Integer Primary Key Autoincrement,
+Ingredientes Text Not Null,
+Quantidade_comprada Integer,
+Valor_ingrediente Real,
+ Quant_usada Int Integer,
+ Unidade Text Not Null,
+  Valor_final Real)
+''')
 
 
 def cadastrar_ingredientes():
     nome_ingrediente = input("Qual ingrediente?:")
     quantidade = int(input("Quantidade comprada:"))
-    valor_ingrediente = int(input("Qual valor do ingrediente?:"))
-    unidade = input("Qual unidade de medida?:")
-    cursor.execute("Insert Into Ingredientes (Ingredientes, Quantidade_comprada, Valor_ingrediente, Unidade) Values (?,?,?,?)", (
-        nome_ingrediente, quantidade, valor_ingrediente, unidade)
-    )
+    valor_ingrediente = float(input("Qual valor do ingrediente?:"))
+    unidade = input("Qual unidade de medida?(kg,g,litro...):")
+    cursor.execute("Insert Into Ficha_ingredientes (Ingredientes, Quantidade_comprada, Valor_ingrediente, Unidade) Values (?,?,?,?)", (
+        nome_ingrediente, quantidade, valor_ingrediente, unidade,))
+    
     conexao.commit()
     print("Ingrediente cadastrado")
 
@@ -37,8 +37,8 @@ def atualizar_ingredientes():
     id = int(input("Novo ID do ingrediente:"))
     nome_ingrediente = input("Novo ingrediente:")
     unidade = input("Nova unidade de medida:")
-    valor_ingrediente = int(input("Novo valor do ingrediente:"))
-    cursor.execute("Update ingredientes Set nome_ingrediente = ?, unidade = ?, valor_ingrediente = ? Where id = ?", (id, nome_ingrediente, unidade, valor_ingrediente))
+    valor_ingrediente = float(input("Novo valor do ingrediente:"))
+    cursor.execute("Update Ficha_ingredientes Set nome_ingrediente = ?, unidade = ?, valor_ingrediente = ? Where id = ?", (id, nome_ingrediente, unidade, valor_ingrediente,))
     conexao.commit()
     print("Ingrediente Atualizado")
 
@@ -54,7 +54,7 @@ while True:
             3-Atualizar ingrediente
             4-Excluir ingrediente""")
 
-    opção = int(input("Digite a opção escolhida:"))
+    opção = input("Digite a opção escolhida:")
     if opção == "1":
         cadastrar_ingredientes()
     elif opção == "2":
@@ -63,5 +63,7 @@ while True:
         atualizar_ingredientes()
     elif opção == "4":
         excluir_ingredientes()
+        break
     else:
         print("Opção inválida.Tente novamente")
+    conexao.close()

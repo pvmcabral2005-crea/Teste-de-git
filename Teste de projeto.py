@@ -1,11 +1,11 @@
 import sqlite3
 import tkinter as tk
 from tkinter import ttk
-conexao = sqlite3.connect('ficha.db')
+conexao = sqlite3.connect('ficha_técnica.db')
 cursor = conexao.cursor()
 
 cursor.execute(
-'''Create Table If Not Exists Ingredientes (
+    '''Create Table If Not Exists Ingredientes (
     ID Integer Primary Key Autoincrement,
     Ingrediente Text Not Null,
     Quantidade_comprada Integer,
@@ -19,7 +19,7 @@ ID Integer Primary Key Autoincrement,
 Receita Text Not Null,
 Quantidade Integer,
 Valor_receita Real,
-Quant_usada Integer )''')
+Tempo_Preparo Integer)''')
 
 cursor.execute('''
 Create Table If Not Exists Produtos(
@@ -27,19 +27,9 @@ ID Integer Primary Key Autoincrement,
 Produto Text Not Null)''')
 conexao.commit()
 
-def tabela_limpa():
-    for item in tabela.get_children():
-        tabela.delete(item)
 
-def busca_tabela_dados():
 
-    cursor.execute("Select ID, Ingrediente From Ingredientes")
-    linhas = cursor.fetchall()
-
-    for linha in linhas:
-        tabela.insert("", "end", values=linha)
-conexao.close()
-#Ingredientes da Ficha
+# Ingredientes da Ficha
 def cadastrar_ingredientes():
     nome_ingrediente = input("Qual ingrediente?:")
     quantidade = int(input("Quantidade comprada:"))
@@ -47,22 +37,23 @@ def cadastrar_ingredientes():
     unidade = input("Qual unidade de medida?(kg,g,litro...):")
     conexao = sqlite3.connect('ficha.db')
     cursor = conexao.cursor()
-    cursor.execute("Insert Into Ingredientes (Ingrediente, Quantidade_comprada, Valor_ingrediente, Unidade, ) Values (?,?,?,?)", (
+    cursor.execute("Insert Into Ingredientes (Ingrediente, Quantidade_comprada, Valor_ingrediente, Unidade) Values (?,?,?,?)", (
     nome_ingrediente, quantidade, valor_ingrediente, unidade,))
-    
+
     conexao.commit()
     print("Ingrediente cadastrado")
 
 
 def listar_ingredientes():
-    conexao = sqlite3.connect('ficha.db')
+    conexao = sqlite3.connect('ficha_técnica.db')
     cursor = conexao.cursor()
     cursor.execute("Select * From Ingredientes")
     dados_ingredientes = cursor.fetchall()
     for item in dados_ingredientes:
         print(item)
 
-# Receitas da Ficha
+
+
 def atualizar_ingredientes():
     id = int(input("Novo ID do ingrediente:"))
     nome_ingrediente = input("Novo ingrediente:")
@@ -70,38 +61,42 @@ def atualizar_ingredientes():
     valor_ingrediente = float(input("Novo valor do ingrediente:"))
     conexao = sqlite3.connect('ficha.db')
     cursor = conexao.cursor()
-    cursor.execute("Update Ingredientes Set Ingrediente = ?, unidade = ?, valor_ingrediente = ? Where id = ?", (id, nome_ingrediente, unidade, valor_ingrediente,))
+    cursor.execute("Update Ingredientes Set Ingrediente = ?, unidade = ?, valor_ingrediente = ? Where id = ?",
+                   (id, nome_ingrediente, unidade, valor_ingrediente,))
     conexao.commit()
     print("Ingrediente Atualizado")
 
 
 def excluir_ingredientes():
     id = int(input("ID:"))
-    conexao = sqlite3.connect('ficha.db')
+    conexao = sqlite3.connect('ficha_técnica.db')
     cursor = conexao.cursor()
     cursor.execute("Delete From Ingredientes Where id = ? ", (id,))
 
     conexao.close()
+# Receitas da Ficha
 
 def cadastrar_receita():
     nome_receita = input("Qual a receita utlizada?:")
     valor_receita = float(input("Qual preço da receita?:"))
     quantidade = int(input("Qual a quantidade?:"))
     tempo_preparo = int(input("Qual o tempo de preparação?:"))
-    conexao = sqlite3.connect("ficha.db")
+    conexao = sqlite3.connect("ficha técnica.db")
     cursor = conexao.cursor()
-    cursor.execute("Insert Into Receitas (Receita, Quantidade, Valor_receita, tempo_preparo,) Values(?,?,?,?)", (nome_receita, valor_receita, quantidade, tempo_preparo,))
+    cursor.execute("Insert Into Receitas (Receita, Quantidade, Valor_receita, Tempo_Preparo) Values(?,?,?,?)",(nome_receita, quantidade, valor_receita, tempo_preparo))
 
     conexao.commit()
     print("Receita cadastrada")
 
+
 def listar_receita():
-    conexao = sqlite3.connect("ficha.db")
+    conexao = sqlite3.connect("ficha_técnica.db")
     cursor = conexao.cursor()
     cursor.execute("Select * From Receitas")
     dados_receita = cursor.fetchall()
     for item in dados_receita:
         print(item)
+
 
 def atualizar_receita():
     id = int(input("ID:"))
@@ -111,16 +106,19 @@ def atualizar_receita():
     novo_tempo = int(input("Novo tempo de preparo?:"))
     conexao = sqlite3.connect("ficha.db")
     cursor = conexao.cursor()
-    cursor.execute("Update Receitas Set Receita = ?, Quantidade = ?, Valor_receita = ?, tempo_preparo = ? Where ID = ? ", (id, nova_receita, nova_quantidade, novo_valor, novo_tempo,))
+    cursor.execute("Update Receitas Set Receita = ?, Quantidade = ?, Valor_receita = ?, Tempo_Preparo = ? Where ID = ? ",
+    (id, nova_receita, nova_quantidade, novo_valor, novo_tempo,))
     conexao.commit()
     print("Ingrediente atualizado")
 
+
 def excluir_receita():
     id = int(input("ID:"))
-    conexao = sqlite3.connect("ficha.db")
+    conexao = sqlite3.connect("ficha_técnica.db")
     cursor = conexao.cursor()
     cursor.execute("Delete From Receitas Where ID = ?", (id,))
     conexao.close()
+
 
 while True:
     print("""===FICHA TÉCNICA INGREDIENTES===
@@ -162,7 +160,7 @@ while True:
 janela = tk.Tk()
 janela.title("Ficha técnica de Alimentos")
 janela.geometry("800x600")
-janela.resizable(True,False)
+janela.resizable(True, False)
 
 frame_titulo = tk.Frame(janela)
 
@@ -170,24 +168,26 @@ label1 = tk.Label(janela, text="Ficha de ingredientes")
 label1.pack(pady=5)
 
 colunas1 = ("ID", "Ingredientes")
-tabela1 = ttk.Treeview(janela, columns=colunas1, show= 'headings')
+tabela1 = ttk.Treeview(janela, columns=colunas1, show='headings')
 
 label2 = tk.Label(janela, text="Ficha de receitas")
 label2.pack(pady=5)
 
 colunas2 = ("ID", "Receitas")
-tabela2 = ttk.Treeview(janela, columns=colunas2, show= "headings")
-busca_tabela_dados()
+tabela2 = ttk.Treeview(janela, columns=colunas2, show="headings")
 
-button_cadastrar = tk.Button(janela, text="Cadastrar", command= cadastrar_ingredientes)
+button_cadastrar = tk.Button(
+    janela, text="Cadastrar", command=cadastrar_ingredientes)
 button_cadastrar.pack()
 
-button_listar = tk.Button(janela, text="Buscar", command= listar_ingredientes)
+button_listar = tk.Button(janela, text="Buscar", command=listar_ingredientes)
 button_listar.pack()
 
-button_atualizar = tk.Button(janela, text="Atualizar", command= atualizar_ingredientes)
+button_atualizar = tk.Button(
+    janela, text="Atualizar", command=atualizar_ingredientes)
 button_atualizar.pack()
 
-button_excluir = tk.Button(janela, text="Excluir", command= excluir_ingredientes)
+button_excluir = tk.Button(janela, text="Excluir",
+                           command=excluir_ingredientes)
 button_excluir.pack()
 janela.mainloop()

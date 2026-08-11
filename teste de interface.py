@@ -1,7 +1,7 @@
 import tkinter as tk
 import sqlite3
 janela = tk.Tk()
-janela.title("Ficha técnica de alimentos")
+janela.title("Cadastro de alunos")
 janela.geometry("800x660")
 janela.resizable(True,False)
 janela.configure(bg = "White")

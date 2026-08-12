@@ -62,7 +62,7 @@ def atualizar_ingredientes():
     conexao = sqlite3.connect('ficha.db')
     cursor = conexao.cursor()
     cursor.execute("Update Ingredientes Set Ingrediente = ?, unidade = ?, valor_ingrediente = ? Where id = ?",
-                   (id, nome_ingrediente, unidade, valor_ingrediente,))
+(id, nome_ingrediente, unidade, valor_ingrediente,))
     conexao.commit()
     print("Ingrediente Atualizado")
 
@@ -184,7 +184,7 @@ button_listar = tk.Button(janela, text="Buscar", command=listar_ingredientes)
 button_listar.pack()
 
 button_atualizar = tk.Button(
-    janela, text="Atualizar", command=atualizar_ingredientes)
+janela, text="Atualizar", command=atualizar_ingredientes)
 button_atualizar.pack()
 
 button_excluir = tk.Button(janela, text="Excluir",

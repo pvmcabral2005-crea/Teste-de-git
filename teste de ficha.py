@@ -128,9 +128,10 @@ label_tabela2.pack(pady=5)
 entry_tabela2 = tk.Entry(frame_cadastro, width=35, show="*")
 entry_tabela2.pack(pady=2)
 
-button_cadastrar = tk.Button(janela, text="Cadastrar ingrediente", command=cadastrar_ingrediente)
-button_cadastrar.pack(side="right", pady=5, padx=10)
-
+button_cadastrar_ingrediente = tk.Button(janela, text="Cadastrar ingrediente", command=cadastrar_ingrediente)
+button_cadastrar_ingrediente.pack(side="right", pady=5, padx=10)
+button_cadastar_receita = tk.Button(janela, text= "Cadastrar receita", command=cadastrar_receita)
+button_cadastrar_receita.pack(side="right", pady=5, padx=10)
 
 
 janela.mainloop()    

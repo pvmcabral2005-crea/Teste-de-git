@@ -1,10 +1,6 @@
 import tkinter as tk
 import sqlite3
 
-janela = tk.Tk()
-janela.title("Ficha técnica de Alimentos")
-janela.geometry("800x600")
-janela.resizable(True,False)
 
 # Ingredientes
 def cadastrar_ingrediente():
@@ -44,9 +40,10 @@ def cadastrar_ingrediente():
     print("Igrediente cadastrado")
 
 def listar_ingrediente():
+    id = int(input("ID:"))
     conexao = sqlite3.connect("ficha_tecnica.db")
     cursor = conexao.cursor()
-    cursor.execute("Select * From Ingredientes") 
+    cursor.execute("Select * From Ingredientes Where id = ?", (id,)) 
     dados_ingredientes = cursor.fetchall()
     for item in dados_ingredientes:
         print(item)
@@ -89,11 +86,13 @@ def cadastrar_receita():
     Quantidade,
     Tempo_preparo) Values(?,?,?,?)''',(receita, valor_receita, quantidade, tempo_preparo))
     conexao.commit()
+    conexao.close()
     print("Receita cadastrada")
 def listar_receita():
+    id = int(input("ID:"))
     conexao = sqlite3.connect("ficha_tecnica.db")
     cursor = conexao.cursor()
-    cursor.execute("Select * From Receitas")
+    cursor.execute("Select * From Receitas Where id = ?", (id,))
     dados_receitas = cursor.fetchall()
     for item in dados_receitas:
         print(item)
@@ -113,6 +112,14 @@ def excluir_receita():
     cursor = conexao.cursor()
     cursor.execute("Delete From Receitas Where id = ?", (id,))
     conexao.close()
+
+
+
+janela = tk.Tk()
+janela.title("Ficha técnica de Alimentos")
+janela.geometry("800x600")
+janela.resizable(True,False)   
+
 frame_cadastro = tk.Frame(janela)
 frame_cadastro.pack(fill="both", expand=True)
 
@@ -128,9 +135,9 @@ label_tabela2.pack(pady=5)
 entry_tabela2 = tk.Entry(frame_cadastro, width=35, show="*")
 entry_tabela2.pack(pady=2)
 
-button_cadastrar = tk.Button(janela, text="Cadastrar ingrediente", command=cadastrar_ingrediente)
-button_cadastrar.pack(side="right", pady=5, padx=10)
+button_cadastrar_ingrediente = tk.Button(janela, text="Cadastrar ingrediente", command=cadastrar_ingrediente)
+button_cadastrar_ingrediente.pack(side="right", pady=5, padx=10)
 
-
-
+button_cadastrar_receita = tk.Button(janela, text= "Cadastrar receita", command=cadastrar_receita)
+button_cadastrar_receita.pack(side="right", pady=5, padx=10)
 janela.mainloop()    

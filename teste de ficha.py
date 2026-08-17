@@ -137,7 +137,15 @@ entry_tabela2.pack(pady=2)
 
 button_cadastrar_ingrediente = tk.Button(janela, text="Cadastrar ingrediente", command=cadastrar_ingrediente)
 button_cadastrar_ingrediente.pack(side="right", pady=5, padx=10)
+<<<<<<< HEAD
 
 button_cadastrar_receita = tk.Button(janela, text= "Cadastrar receita", command=cadastrar_receita)
 button_cadastrar_receita.pack(side="right", pady=5, padx=10)
 janela.mainloop()    
+=======
+button_cadastar_receita = tk.Button(janela, text= "Cadastrar receita", command=cadastrar_receita)
+button_cadastrar_receita.pack(side="right", pady=5, padx=10)
+
+
+janela.mainloop()    
+>>>>>>> 46bab1f8922e282168a6097ba1d830cd3d98e99c
